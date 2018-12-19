@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.List;
 
@@ -27,11 +26,10 @@ public class InnerAdapter extends RecyclerView.Adapter<InnerAdapter.InnerHolder>
     public InnerHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         Context context = viewGroup.getContext();
         final InnerHolder holder = new InnerHolder(LayoutInflater.from(context).inflate(R.layout.item_inner, viewGroup, false));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.mText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("inner", holder.getAdapterPosition() + " " + mList.size());
-
+                Log.e("nest inner: ", holder.getAdapterPosition() + " " + mList.size() + " " + this.toString());
             }
         });
         return holder;
@@ -40,6 +38,7 @@ public class InnerAdapter extends RecyclerView.Adapter<InnerAdapter.InnerHolder>
     @Override
     public void onBindViewHolder(@NonNull InnerHolder viewHolder, int i) {
         viewHolder.mText.setText(String.valueOf(mList.get(i)));
+        Log.e("nest bind: ", i + " " + viewHolder.getAdapterPosition() + " " + mList.size() + " " + viewHolder.mText.getOnClickListener().toString());
     }
 
     @Override
@@ -49,17 +48,11 @@ public class InnerAdapter extends RecyclerView.Adapter<InnerAdapter.InnerHolder>
 
     static class InnerHolder extends RecyclerView.ViewHolder {
 
-        TextView mText;
+        CustomOnClickView mText;
 
         public InnerHolder(@NonNull View itemView) {
             super(itemView);
-//            itemView.setOnClickListener(this);
             mText = itemView.findViewById(R.id.text);
         }
-
-//        @Override
-//        public void onClick(View v) {
-//            Log.e("inner", getAdapterPosition() + " " + mList.size());
-//        }
     }
 }

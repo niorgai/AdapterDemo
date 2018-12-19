@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this).setInitialPrefetchItemCount(););
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         OutsideAdapter mAdapter = new OutsideAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
